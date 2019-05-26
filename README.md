@@ -1,4 +1,4 @@
-# wine-ratings
+# (WIP) wine-ratings
 Predict the rating of a wine given other characteristics
 
 This project is inspired by the Kaggle Dataset [Wine Reviews](https://www.kaggle.com/zynicide/wine-reviews) by user [@zackthoutt](https://www.kaggle.com/zynicide)
