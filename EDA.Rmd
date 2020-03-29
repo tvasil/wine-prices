@@ -1,0 +1,50 @@
+---
+title: "EDA wine prices"
+output: html_notebook
+---
+
+
+```{r}
+library(data.table)
+
+dt <- fread('winemag-data_first150k.csv')
+head(dt)
+```
+## Data cleaning
+
+First, we want to drop any columns we're not interested in. In this analysis, we will focus only on:
+- points
+- price
+- country
+- province
+- variety
+
+We're omitting any other variables since we don't need them to answer this question. 
+
+We also need to drop any data where we don't have prices and impute any missing data (or drop it). 
+
+```{r}
+dt <- dt[!is.na(price),c('points', 'price', 'province', 'country', 'variety')]
+
+summary(dt)
+```
+
+
+## EDA 
+
+Second, we will look into the dataset. How many observations? How many different regions? Is there enough between regions and varietals of wine? What about the relationship between `points` and `price`? 
+
+Overall, we're trying to find out _what are some good predictors_ for the price of each wine bottle. 
+```{r}
+plot(price ~ points, data = dt)
+plot(jitter(log(price)) ~ points, data = dt) # the relationship looks more linear if we plot the logs
+```
+
+We see from the above that there is a positive relationship between points and price for a bottle of wine. However, for higher points, we are seeing a larger variation of prices, and interestingly, for wines with 100 points, we have much fewer data points, and also the prices we see are somewhat lower than for lower prices. 
+
+What about the relationship between `price` and the region on the varietal?
+
+```{r}
+dt[!is.na(price)]
+```
+
